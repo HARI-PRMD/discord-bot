@@ -1,6 +1,7 @@
 // bot code time !
 
 import { Client, GatewayIntentBits } from "discord.js";
+import { writeFileSync, readFileSync } from "fs";
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -9,16 +10,43 @@ const client = new Client({
   ],
 });
 
+const mapOfUsers: Map<string, string> = new Map();
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user!.tag}!`);
+  loadMap(mapOfUsers);
 });
 
-const MapofUsers: Map<string, string> = new Map();
+function saveMap(map: Map<string, string>) {
+  const finalObject: { [key: string]: string } = {};
+  for (const [key, value] of map.entries()) {
+    finalObject[key] = value;
+  }
+  const stringifiedObject = JSON.stringify(finalObject);
+
+  // write to file
+  writeFileSync("names.json", stringifiedObject);
+}
+
+function loadMap(map: Map<string, string>) {
+  try {
+    const fileData = readFileSync("names.json");
+    if (!fileData) return;
+    const stringData = fileData.toString();
+    const parsedData = JSON.parse(stringData) as { [key: string]: string };
+    for (const [key, value] of Object.entries(parsedData)) {
+      map.set(key, value);
+    }
+    console.log(`Loaded ${Object.keys(parsedData).length} names from file!`);
+  } catch (error) {
+    console.error("Error occurred while loading file:", error);
+  }
+}
 
 client.on("messageCreate", (message) => {
   if (message.content.startsWith("!")) {
     if (message.content.includes("hi")) {
-      let nickname = MapofUsers.get(message.author.id);
+      let nickname = mapOfUsers.get(message.author.id);
       if (nickname === undefined) {
         message.reply("hiiii baka");
       } else {
@@ -35,15 +63,16 @@ client.on("messageCreate", (message) => {
     }
     let nickname = messageArr[1];
 
-    console.log("Map before:", MapofUsers);
-    MapofUsers.set(message.author.id, nickname);
+    console.log("Map before:", mapOfUsers);
+    mapOfUsers.set(message.author.id, nickname);
     console.log(`added ${nickname}`);
-    console.log("Map after:", MapofUsers);
+    console.log("Map after:", mapOfUsers);
 
     // nicknames have to be 1 word long
     message.reply(`Haiii ${nickname}`);
     // If you want to send a message to the same channel without a reply
     // message.channel.send("some value")
+    saveMap(mapOfUsers);
   }
 
   // if (message.mentions.has("1031072718570922014")) {
