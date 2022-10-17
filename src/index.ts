@@ -30,7 +30,7 @@ function saveMap(map: Map<string, string>) {
 
 function loadMap(map: Map<string, string>) {
   try {
-    const fileData = readFileSync("names.json");
+    const fileData = readFileSync("./data/names.json");
     if (!fileData) return;
     const stringData = fileData.toString();
     const parsedData = JSON.parse(stringData) as { [key: string]: string };
@@ -44,16 +44,7 @@ function loadMap(map: Map<string, string>) {
 }
 
 client.on("messageCreate", (message) => {
-  if (message.content.startsWith("!")) {
-    if (message.content.includes("hi")) {
-      let nickname = mapOfUsers.get(message.author.id);
-      if (nickname === undefined) {
-        message.reply("hiiii baka");
-      } else {
-        message.reply(`hiiii ${nickname}`);
-      }
-      console.log("recieved message");
-    }
+  if (message.content.startsWith("!hi")) {
   }
   if (message.content.startsWith("!addme")) {
     let messageArr = message.content.split(" ");
