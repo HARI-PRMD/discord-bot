@@ -1,6 +1,5 @@
-import { Client, GatewayIntentBits } from "discord.js";
-import { writeFileSync, readFileSync } from "fs";
-import { saveMap, loadMap } from "./data";
+import { Client, GatewayIntentBits, Message } from "discord.js";
+import { saveMap, loadMap, UserData, userData, User } from "./data";
 
 const client = new Client({
   intents: [
@@ -10,37 +9,68 @@ const client = new Client({
   ],
 });
 
-export function messageHi(message: any, mapOfUsers: Map<string, string>): void {
-  if (message.content.includes("hi")) {
-    let nickname = mapOfUsers.get(message.author.id);
-    if (nickname === undefined) {
-      message.reply("hiiii person");
-    } else {
-      message.reply(`hiiii ${nickname}`);
-    }
-    console.log("recieved message");
+////////////////////////////////////////////////////////////////////////////////
+export function messageHi(message: Message): void {
+  let user = userData.users.find((x) => x.userId === message.author.id);
+  console.log(userData);
+  if (user === undefined) {
+    message.reply(
+      `Hiiii I don't think I've met you before 👀, whats your name ${message.author.username} ?`
+    );
+  } else {
+    message.reply(`Hiiii ${user.nickname} ❤️ nice seeing you online again`);
   }
 }
 
-export function messageAddMe(
-  message: any,
-  mapOfUsers: Map<string, string>
-): void {
-  let messageArr = message.content.split(" ");
-  if (messageArr.length < 2) {
+export function messageAddMe(message: Message): void {
+  let nickname = message.content.replace("!addme", "");
+  let user = userData.users.find((x) => x.userId === message.author.id);
+  if (nickname.length < 1) {
     message.reply("You did not specify a nickname!");
     return;
   }
-  let nickname = messageArr[1];
-
-  console.log("Map before:", mapOfUsers);
-  mapOfUsers.set(message.author.id, nickname);
-  console.log(`added ${nickname}`);
-  console.log("Map after:", mapOfUsers);
-
-  // nicknames have to be 1 word long
-  message.reply(`Haiii ${nickname}`);
-  // If you want to send a message to the same channel without a reply
-  // message.channel.send("some value")
-  saveMap(mapOfUsers);
+  nickname = nickname.substring(1);
+  if (user === undefined) {
+    console.log(`creating new user for ${message.author.username}`);
+    // creates new user
+    userData.users.push({
+      userId: message.author.id,
+      nickname,
+      money: 0,
+    });
+  } else {
+    user.userId = message.author.id;
+    user.nickname = nickname;
+    user.money = user.money;
+  }
+  message.reply(`Haiii ${nickname}, nice to meet you! ❤️`);
+  saveMap();
 }
+
+export function messageWork(message: Message): void {
+  let user = userData.users.find((x) => x.userId === message.author.id);
+  if (user === undefined) {
+    message.reply(
+      `You haven't even told me your name yet ${message.author.username} 😭`
+    );
+  } else {
+    user.money += 10;
+    message.reply(
+      `You coded at Jareds typing speed for 16 hours and now have $${user.money}`
+    );
+  }
+}
+
+export function messageBalance(message: Message): void {
+  let user = userData.users.find((x) => x.userId === message.author.id);
+  if (user === undefined) {
+    message;
+    message.reply(
+      `You haven't setup an account with your local simp bank ${message.author.username} 😭`
+    );
+  } else {
+    message.reply(`Your current bank balance is $${user.money}.`);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
