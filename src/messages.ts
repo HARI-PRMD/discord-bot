@@ -28,6 +28,11 @@ export function messageAddMe(message: Message): void {
   if (nickname.length < 1) {
     message.reply("You did not specify a nickname!");
     return;
+  } else if (nickname.length > 30) {
+    message.reply(
+      "are you sure you want me to call your that 🫣, isn't that nickname a little too long?"
+    );
+    return;
   }
   nickname = nickname.substring(1);
   if (user === undefined) {
@@ -56,7 +61,7 @@ export function messageWork(message: Message): void {
   } else {
     user.money += 10;
     message.reply(
-      `You coded at Jareds typing speed for 16 hours and now have $${user.money}`
+      `You coded at Jared's typing speed for 16 hours and now have $${user.money}`
     );
   }
 }
