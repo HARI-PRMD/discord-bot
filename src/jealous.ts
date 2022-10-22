@@ -1,25 +1,26 @@
 import { Message } from "discord.js";
-// import "./data/nameList.csv";
-import { writeFileSync, readFileSync } from "fs";
+import { readFileSync } from "fs";
+import { userData } from "./data";
 
 export function jealousBot(message: Message): boolean {
-  try {
-    const fileData = readFileSync("./data/nameList.csv");
-    if (!fileData) {
-      console.log("no names in ./data/namesList.csv");
-    }
-    const stringData = fileData.toString().toLowerCase().split("\n");
-    console.log(stringData);
-    for (let name of stringData) {
-      if (message.content.toLowerCase().includes(name)) {
-        console.log(name);
-        console.log(`YOU SAID THE FUNNTY NAME IM JEALOUSSSS!!!`);
-        message.react("😠");
-        return true;
-      }
-    }
-  } catch (error) {
-    console.error("Error occurred while loading file:", error);
+  let user = userData.users.find((x) => x.userId === message.author.id);
+  let nickname = user?.nickname;
+  message.react("😠");
+  const fileData = readFileSync("./data/nameList.csv");
+  if (!fileData) {
+    console.log("no names in ./data/namesList.csv");
+    return false;
+  }
+  const stringData = new Set(fileData.toString().toLowerCase().split("\n"));
+
+  if (
+    message.content.split(" ").some((x) => stringData.has(x)) &&
+    nickname !== undefined
+  ) {
+    message.reply(
+      `Baka stop talking about other girls all the time!! You have me...😔💔`
+    );
+    return true;
   }
   return false;
 }

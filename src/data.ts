@@ -21,28 +21,22 @@ export interface User {
 export let userData: UserData = {
   users: [],
 };
+
 ////////////////////////////////////////////////////////////////////////////////
 export function saveMap(): void {
   const stringifiedUserData = JSON.stringify(userData);
   // write to file
   writeFileSync("./data/names.json", stringifiedUserData);
 }
-
+////////////////////////////////////////////////////////////////////////////////
 export function loadMap() {
   try {
+    // loading up the user data
     const fileData = readFileSync("./data/names.json");
     if (!fileData) return;
     const stringData = fileData.toString();
-    // console.log(stringData);
     const parsedData = JSON.parse(stringData) as UserData;
-    // console.log(parsedData);
-    // console.log(typeof parsedData);
     userData = { ...parsedData };
-    console.log(userData);
-
-    // console.log(typeof userData);
-    // saveMap(userData);
-    // console.log(`Loaded ${Object.keys(parsedData).length} names from file!`);
   } catch (error) {
     console.error("Error occurred while loading file:", error);
   }

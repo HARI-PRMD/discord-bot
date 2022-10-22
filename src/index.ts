@@ -52,16 +52,5 @@ client.on("messageCreate", (message) => {
   if (jealousBot(message)) {
     console.log("your message had the funny name in it");
   }
-  // if (message.mentions.has("1031072718570922014")) {
-  // }
 });
-
-// client.on("interactionCreate", async (interaction) => {
-//   if (!interaction.isChatInputCommand()) return;
-
-//   if (interaction.commandName === "ping") {
-//     await interaction.reply("Pong!");
-//   }
-// });
-
 ////////////////////////////////////////////////////////////////////////////////

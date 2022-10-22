@@ -1,12 +1,12 @@
-import { Message } from "discord.js"
-import { EmbedBuilder } from "@discordjs/builders"
+import { Message } from "discord.js";
+import { EmbedBuilder } from "@discordjs/builders";
 ////////////////////////////////////////////////////////////////////////////////
 export function help(message: Message): void {
   const messageFunctions = `\`!hi\` - Hehe-chan greets you by your nickname or default username.
 \`!addme\` - have Hehe-chan call you a nickname as well as setup your bank account.
 \`!work\` - earn money to spend on Hehe-chan's functions.
 \`!balance\` - view your current bank balance.
-    `
+    `;
   const helpEmbed = new EmbedBuilder().setTitle("so very poggers").addFields(
     {
       name: "message functions",
@@ -14,6 +14,6 @@ export function help(message: Message): void {
     },
     { name: "e-?????? functions", value: "sadf" },
     { name: "money functions", value: "sdfd" }
-  )
-  message.channel.send({ embeds: [helpEmbed] })
+  );
+  message.reply({ embeds: [helpEmbed] });
 }

@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, Message } from "discord.js";
-import { saveMap, loadMap, UserData, userData, User } from "./data";
+import { saveMap, userData } from "./data";
 
 const client = new Client({
   intents: [
@@ -12,7 +12,6 @@ const client = new Client({
 ////////////////////////////////////////////////////////////////////////////////
 export function messageHi(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
-  console.log(userData);
   if (user === undefined) {
     message.reply(
       `Hiiii I don't think I've met you before 👀, whats your name ${message.author.username} ?`
