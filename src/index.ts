@@ -8,7 +8,7 @@ import {
   messageWork,
 } from "./messages"
 import { saveMap, loadMap, userData } from "./data"
-import { help } from "./sotrue"
+import { help } from "./help"
 
 require("dotenv").config()
 
