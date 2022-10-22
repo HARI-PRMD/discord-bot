@@ -18,7 +18,7 @@ export function jealousBot(message: Message): boolean {
   ) {
     message.react("😠");
     message.reply(
-      `Baka stop talking about other girls all the time!! You have me...😔💔`
+      `Baka ${nickname} stop talking about other girls all the time!! You have me...😔💔`
     );
     return true;
   }
