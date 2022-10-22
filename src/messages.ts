@@ -21,7 +21,7 @@ export function messageHi(message: Message): void {
     message.reply(`Hiiii ${user.nickname} ❤️ nice seeing you online again`);
   }
 }
-
+////////////////////////////////////////////////////////////////////////////////
 export function messageAddMe(message: Message): void {
   let nickname = message.content.replace("!addme", "");
   let user = userData.users.find((x) => x.userId === message.author.id);
@@ -51,7 +51,7 @@ export function messageAddMe(message: Message): void {
   message.reply(`Haiii ${nickname}, nice to meet you! ❤️`);
   saveMap();
 }
-
+////////////////////////////////////////////////////////////////////////////////
 export function messageWork(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
   if (user === undefined) {
@@ -65,7 +65,7 @@ export function messageWork(message: Message): void {
     );
   }
 }
-
+////////////////////////////////////////////////////////////////////////////////
 export function messageBalance(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
   if (user === undefined) {

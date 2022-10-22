@@ -1,6 +1,6 @@
 import { Message } from "discord.js"
 import { EmbedBuilder } from "@discordjs/builders"
-
+////////////////////////////////////////////////////////////////////////////////
 export function help(message: Message): void {
   const messageFunctions = `\`!hi\` - Hehe-chan greets you by your nickname or default username.
 \`!addme\` - have Hehe-chan call you a nickname as well as setup your bank account.
