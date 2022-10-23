@@ -52,5 +52,10 @@ client.on("messageCreate", (message) => {
   if (jealousBot(message)) {
     console.log("your message had the funny name in it");
   }
+
+  if (message.mentions.has("1031072718570922014")) {
+    message.channel.send(`Baka ${message.author.toString()} 🤨🏓`);
+  }
+
 });
 ////////////////////////////////////////////////////////////////////////////////
