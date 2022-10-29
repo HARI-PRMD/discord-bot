@@ -54,8 +54,9 @@ client.on("messageCreate", (message) => {
   }
 
   if (message.mentions.has("1031072718570922014")) {
-    message.channel.send(`Baka ${message.author.toString()} 🤨🏓`);
+    message.channel.send(
+      `Baka ${message.author.toString()} 🏓🤨 I'm not ready yet!`
+    );
   }
-
 });
 ////////////////////////////////////////////////////////////////////////////////
