@@ -22,6 +22,8 @@ export let userData: UserData = {
   users: [],
 };
 
+export let girlsNames: Set<string> = new Set();
+
 ////////////////////////////////////////////////////////////////////////////////
 export function saveMap(): void {
   const stringifiedUserData = JSON.stringify(userData);
@@ -39,6 +41,16 @@ export function loadMap() {
     userData = { ...parsedData };
   } catch (error) {
     console.error("Error occurred while loading file:", error);
+  }
+  // getting girls names list for jealous function from file
+  try {
+    const girlsNamesData = readFileSync("./data/nameList.csv");
+    if (!girlsNamesData) {
+      console.log("no names in ./data/namesList.csv");
+    }
+    girlsNames = new Set(girlsNamesData.toString().toLowerCase().split("\n"));
+  } catch (error) {
+    console.log("Error occurred while loading names:", error);
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
