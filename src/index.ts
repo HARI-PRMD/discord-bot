@@ -48,14 +48,12 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith("!help")) {
     help(message);
   }
-
-  if (jealousBot(message)) {
-    console.log("your message has the funny name in it");
-  }
+  
+  jealousBot(message)
 
   if (message.mentions.has("1031072718570922014")) {
     message.channel.send(
-      `Baka ${message.author.toString()} 🏓🤨 I'm not ready yet!`
+      `Baka ${message.author.username} 🏓🤨 I'm not ready yet!`
     );
   }
 });

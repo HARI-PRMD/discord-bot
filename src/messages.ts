@@ -18,6 +18,7 @@ export function messageHi(message: Message): void {
     );
   } else {
     message.reply(`Hiiii ${user.nickname} ❤️ nice seeing you online again`);
+    console.log(`Said hi to ${message.author.username}`)
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +63,7 @@ export function messageWork(message: Message): void {
     message.reply(
       `You coded at Jared's typing speed for 16 hours and now have $${user.money}`
     );
+    console.log(`${message.author.toString()} --> $${user.money}`);
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
