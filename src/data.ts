@@ -30,7 +30,7 @@ export function saveMap(): void {
   const stringifiedUserData = JSON.stringify(userData);
   // write to file
   writeFileSync("./data/names.json", stringifiedUserData);
-  console.log(colors.inverse.brightMagenta('FILE WRITE') + colors.brightMagenta(' saved user data to file'));
+  console.log(colors.inverse.brightMagenta('FILE WRITE') + colors.brightMagenta('  saved user data to file'));
 }
 ////////////////////////////////////////////////////////////////////////////////
 export function loadMap() {
@@ -51,7 +51,7 @@ export function loadMap() {
       console.log(colors.inverse.brightYellow('ERROR') + colors.brightYellow(" no names in ./data/namesList.csv"));
     }
     girlsNames = new Set(girlsNamesData.toString().toLowerCase().split("\n"));
-    console.log(colors.inverse.brightMagenta('FILE READ') + colors.brightMagenta(' Loaded user data to program state'));
+    console.log(colors.inverse.brightMagenta('FILE READ') + colors.brightMagenta('   Loaded user data to program state'));
   } catch (error) {
     console.log();
     console.error(colors.inverse.brightRed('ERROR') + colors.brightRed(` Error occurbrightRed while loading names: ${error}`));
