@@ -10,6 +10,7 @@ import {
 import { saveMap, loadMap, userData } from "./data";
 import { help } from "./help";
 import { jealousBot } from "./jealous";
+var colors = require('colors/safe');
 
 require("dotenv").config();
 
@@ -24,7 +25,7 @@ const client = new Client({
 client.login(process.env.TOKEN);
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user!.tag}!`);
+  console.log(colors.inverse.brightGreen('LOGGED IN') + colors.brightGreen(` Logged in as ${client.user!.tag}!`))
   loadMap();
 });
 
