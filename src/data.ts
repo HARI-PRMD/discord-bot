@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { writeFileSync, readFileSync } from "fs";
+var colors = require('colors/safe');
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -29,6 +30,7 @@ export function saveMap(): void {
   const stringifiedUserData = JSON.stringify(userData);
   // write to file
   writeFileSync("./data/names.json", stringifiedUserData);
+  console.log(colors.inverse.brightMagenta('FILE WRITE') + colors.brightMagenta(' saved user data to file'));
 }
 ////////////////////////////////////////////////////////////////////////////////
 export function loadMap() {
@@ -40,17 +42,19 @@ export function loadMap() {
     const parsedData = JSON.parse(stringData) as UserData;
     userData = { ...parsedData };
   } catch (error) {
-    console.error("Error occurred while loading file:", error);
+    console.error(colors.inverse.brightRed('ERROR') + colors.brightRed(` Error occurbrightRed while loading file:, ${error}`));
   }
   // getting girls names list for jealous function from file
   try {
     const girlsNamesData = readFileSync("./data/nameList.csv");
     if (!girlsNamesData) {
-      console.log("no names in ./data/namesList.csv");
+      console.log(colors.inverse.brightYellow('ERROR') + colors.brightYellow(" no names in ./data/namesList.csv"));
     }
     girlsNames = new Set(girlsNamesData.toString().toLowerCase().split("\n"));
+    console.log(colors.inverse.brightMagenta('FILE READ') + colors.brightMagenta(' Loaded user data to program state'));
   } catch (error) {
-    console.log("Error occurred while loading names:", error);
+    console.log();
+    console.error(colors.inverse.brightRed('ERROR') + colors.brightRed(` Error occurbrightRed while loading names: ${error}`));
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
