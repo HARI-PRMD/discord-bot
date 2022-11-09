@@ -1,6 +1,9 @@
 // bot code time !
 // import * as dotenv from "dotenv";
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, EmbedBuilder, GatewayIntentBits } from "discord.js";
+const { MessageAttachment } = require('discord.js')
+import { writeFileSync, readFileSync } from "fs";
+const path = require('path')
 import {
   messageAddMe,
   messageBalance,
@@ -49,6 +52,24 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith("!help")) {
     help(message);
   }
+  
+  if (message.content.startsWith("!rule")) {
+    // message.channel.send("./assets/image0.png")
+    // message.reply("Our Lord Hehe  only wants u to follow 1 rule 🥺💞", rule)
+    const ruleEmbed = new EmbedBuilder()
+    .setColor([229, 161, 162])
+    .setTitle("Our Lord Hehe  only wants u to follow 1 rule 🥺💞",)
+    .setImage('https://media.discordapp.net/attachments/1026635306868412498/1039344224086282310/image0.jpg')
+    .setTimestamp()
+      message.channel.send({ embeds: [ruleEmbed] });
+    
+  //   message.channel.send('Message that goes above image', {
+  //     files: [
+  //         "./image-to-send.png"
+  //     ]
+  // });
+  }
+
   
   jealousBot(message)
 

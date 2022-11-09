@@ -27,7 +27,7 @@ export let girlsNames: Set<string> = new Set();
 
 ////////////////////////////////////////////////////////////////////////////////
 export function saveMap(): void {
-  const stringifiedUserData = JSON.stringify(userData);
+  const stringifiedUserData = JSON.stringify(userData, null, 2);
   // write to file
   writeFileSync("./data/names.json", stringifiedUserData);
   console.log(colors.inverse.brightMagenta(' FILE WRITE ') + colors.brightMagenta('  saved user data to file'));

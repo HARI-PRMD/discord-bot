@@ -86,6 +86,7 @@ export function messageWork(message: Message): void {
   } else {
     message.reply(`Your current bank balance is $${user.money}.`);
     console.log(colors.inverse.brightYellow(' BALANCE ') + colors.brightGreen(`     ${message.author.username} Checked balance`));
+    saveMap();
   }
 }
 
