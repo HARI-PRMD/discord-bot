@@ -1,19 +1,20 @@
 // bot code time !
 // import * as dotenv from "dotenv";
 import { Client, EmbedBuilder, GatewayIntentBits } from "discord.js";
-const { MessageAttachment } = require('discord.js')
+const { MessageAttachment } = require("discord.js");
 import { writeFileSync, readFileSync } from "fs";
-const path = require('path')
+const path = require("path");
 import {
   messageAddMe,
   messageBalance,
   messageHi,
+  messageRule,
   messageWork,
 } from "./messages";
-import { saveMap, loadMap, userData } from "./data";
+import { loadMap, saveMap, userData } from "./data";
 import { help } from "./help";
 import { jealousBot } from "./jealous";
-var colors = require('colors/safe');
+var colors = require("colors/safe");
 
 require("dotenv").config();
 
@@ -28,10 +29,17 @@ const client = new Client({
 client.login(process.env.TOKEN);
 
 client.on("ready", () => {
-  console.log(colors.inverse.brightGreen(' LOGGED IN ') + colors.brightGreen(`   Logged in as ${client.user!.tag}!`))
+  console.log(
+    colors.inverse.brightGreen(" LOGGED IN ") +
+      colors.brightGreen(`   Logged in as ${client.user!.tag}!`)
+  );
   loadMap();
 });
+// process.on("SIGINT", () => {
+//   console.log("LMAO");
+//   server.close()
 
+// })
 client.on("messageCreate", (message) => {
   if (message.content.startsWith("!hi")) {
     messageHi(message);
@@ -52,31 +60,26 @@ client.on("messageCreate", (message) => {
   if (message.content.startsWith("!help")) {
     help(message);
   }
-  
+
   if (message.content.startsWith("!rule")) {
-    // message.channel.send("./assets/image0.png")
-    // message.reply("Our Lord Hehe  only wants u to follow 1 rule 🥺💞", rule)
-    const ruleEmbed = new EmbedBuilder()
-    .setColor([229, 161, 162])
-    .setTitle("Our Lord Hehe  only wants u to follow 1 rule 🥺💞",)
-    .setImage('https://media.discordapp.net/attachments/1026635306868412498/1039344224086282310/image0.jpg')
-    .setTimestamp()
-      message.channel.send({ embeds: [ruleEmbed] });
-    
-  //   message.channel.send('Message that goes above image', {
-  //     files: [
-  //         "./image-to-send.png"
-  //     ]
-  // });
+    messageRule(message);
   }
 
-  
-  jealousBot(message)
+  // if (message.content.toLowerCase().includes("when") && message.content.toLowerCase().includes("feature") && message.content.toLowerCase().includes("chan")) {
+  //   message.reply(`Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`)
+  // }
+
+  jealousBot(message);
 
   if (message.mentions.has("1031072718570922014")) {
     message.channel.send(
       `Baka ${message.author.username} 🏓🤨 I'm not ready yet!`
     );
   }
+
 });
 ////////////////////////////////////////////////////////////////////////////////
+// process.on("SIGINT", () => {
+//   saveMap();
+//   console.log("Shutting down bot gracefully.");
+// });
