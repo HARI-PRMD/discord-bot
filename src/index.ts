@@ -30,8 +30,8 @@ client.on("ready", () => {
   // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
   client.user?.setPresence({
     activities: [{ 
-      name: "with your feelings",
-      type: ActivityType.Playing,
+      name: "you study 🤫",
+      type: ActivityType.Watching,
       url: 'https://github.com/HARI-PRMD'
    }],
     status: "online",

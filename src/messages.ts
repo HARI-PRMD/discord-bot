@@ -1,4 +1,4 @@
-import { Client, EmbedBuilder, GatewayIntentBits, Message } from "discord.js";
+import { Client, EmbedBuilder, GatewayIntentBits, Message,  } from "discord.js";
 import { saveMap, userData } from "./data";
 var colors = require("colors/safe");
 
@@ -169,8 +169,8 @@ export function messageRule(message: Message): void {
     .setColor([229, 161, 162])
     .setTitle(`Our Lord Hehe only wants u to follow 1 rule 🥺💞`)
     .setImage(
-      "https://media.discordapp.net/attachments/1026635306868412498/1039344224086282310/image0.jpg"
+      'attachment://rule.png'
     )
     .setTimestamp();
-  message.channel.send({ embeds: [ruleEmbed] });
+  message.channel.send({ embeds: [ruleEmbed], files: ['./assets/rule.png'] });
 }
