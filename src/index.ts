@@ -1,9 +1,6 @@
 // bot code time !
 // import * as dotenv from "dotenv";
-import { Client, EmbedBuilder, GatewayIntentBits } from "discord.js";
-const { MessageAttachment } = require("discord.js");
-import { writeFileSync, readFileSync } from "fs";
-const path = require("path");
+import { Client, GatewayIntentBits, ActivityType } from "discord.js";
 import {
   messageAddMe,
   messageBalance,
@@ -11,14 +8,15 @@ import {
   messageRule,
   messageWork,
 } from "./messages";
-import { loadMap, saveMap, userData } from "./data";
+import { loadMap } from "./data";
 import { help } from "./help";
 import { jealousBot } from "./jealous";
+import { matchPFP, matchStatus } from "./dating_functions";
 var colors = require("colors/safe");
 
 require("dotenv").config();
 
-const client = new Client({
+export const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.MessageContent,
@@ -27,8 +25,17 @@ const client = new Client({
 });
 ////////////////////////////////////////////////////////////////////////////////
 client.login(process.env.TOKEN);
-
+// https://user-images.githubusercontent.com/100102134/197337179-c1b74c16-f2e1-46cd-85eb-6e686b5e8939.JPG
 client.on("ready", () => {
+  // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
+  client.user?.setPresence({
+    activities: [{ 
+      name: "you study 🤫",
+      type: ActivityType.Watching,
+      url: 'https://github.com/HARI-PRMD'
+   }],
+    status: "online",
+  });
   console.log(
     colors.inverse.brightGreen(" LOGGED IN ") +
       colors.brightGreen(`   Logged in as ${client.user!.tag}!`)
@@ -40,33 +47,55 @@ client.on("ready", () => {
 //   server.close()
 
 // })
+
 client.on("messageCreate", (message) => {
-  if (message.content.startsWith("!hi")) {
+  if (message.content.toLowerCase().startsWith("!hi")) {
     messageHi(message);
   }
 
-  if (message.content.startsWith("!addme")) {
+  if (message.content.toLowerCase().startsWith("!addme")) {
     messageAddMe(message);
   }
 
-  if (message.content.startsWith("!work")) {
+  if (message.content.toLowerCase().startsWith("!work")) {
     messageWork(message);
   }
+  
+  if (message.content.toLowerCase().startsWith("!matchPFP")) {
+    console.log(message.author.avatar)
+    matchPFP(message);
+  }
+  
+  if (message.content.toLowerCase().startsWith("!status")) {
+    matchStatus(message);
+  }
 
-  if (message.content.startsWith("!balance")) {
+  if (message.content.toLowerCase().startsWith("!balance")) {
     messageBalance(message);
   }
 
-  if (message.content.startsWith("!help")) {
+  if (message.content.toLowerCase().startsWith("!help")) {
     help(message);
   }
 
-  if (message.content.startsWith("!rule")) {
+  if (message.content.toLowerCase().startsWith("!rule")) {
     messageRule(message);
   }
 
-  if (message.content.toLowerCase().includes("when") && message.content.toLowerCase().includes("feature") && message.content.toLowerCase().includes("chan")) {
-    message.reply(`Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`)
+  if (message.content.toLowerCase().startsWith("!gm")) {
+    message.react("💞");
+    message.react("🌅");
+    message.reply(`Goood Morning ${message.author.username} 😘`);
+  }
+
+  if (
+    message.content.toLowerCase().includes("when") &&
+    message.content.toLowerCase().includes("feature") &&
+    message.content.toLowerCase().includes("chan")
+  ) {
+    message.reply(
+      `Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`
+    );
   }
 
   jealousBot(message);
@@ -76,7 +105,6 @@ client.on("messageCreate", (message) => {
       `Baka ${message.author.username} 🏓🤨 I'm not ready yet!`
     );
   }
-
 });
 ////////////////////////////////////////////////////////////////////////////////
 // process.on("SIGINT", () => {
