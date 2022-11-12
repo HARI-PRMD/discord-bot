@@ -2,13 +2,13 @@ import { Client, EmbedBuilder, GatewayIntentBits, Message } from "discord.js";
 import { saveMap, userData } from "./data";
 var colors = require("colors/safe");
 
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessages,
-  ],
-});
+// const client = new Client({
+//   intents: [
+//     GatewayIntentBits.Guilds,
+//     GatewayIntentBits.MessageContent,
+//     GatewayIntentBits.GuildMessages,
+//   ],
+// });
 
 ////////////////////////////////////////////////////////////////////////////////
 export function messageHi(message: Message): void {
