@@ -49,40 +49,40 @@ client.on("ready", () => {
 // })
 
 client.on("messageCreate", (message) => {
-  if (message.content.startsWith("!hi")) {
+  if (message.content.toLowerCase().startsWith("!hi")) {
     messageHi(message);
   }
 
-  if (message.content.startsWith("!addme")) {
+  if (message.content.toLowerCase().startsWith("!addme")) {
     messageAddMe(message);
   }
 
-  if (message.content.startsWith("!work")) {
+  if (message.content.toLowerCase().startsWith("!work")) {
     messageWork(message);
   }
   
-  if (message.content.startsWith("!matchPFP")) {
+  if (message.content.toLowerCase().startsWith("!matchPFP")) {
     console.log(message.author.avatar)
     matchPFP(message);
   }
   
-  if (message.content.startsWith("!status")) {
+  if (message.content.toLowerCase().startsWith("!status")) {
     matchStatus(message);
   }
 
-  if (message.content.startsWith("!balance")) {
+  if (message.content.toLowerCase().startsWith("!balance")) {
     messageBalance(message);
   }
 
-  if (message.content.startsWith("!help")) {
+  if (message.content.toLowerCase().startsWith("!help")) {
     help(message);
   }
 
-  if (message.content.startsWith("!rule")) {
+  if (message.content.toLowerCase().startsWith("!rule")) {
     messageRule(message);
   }
 
-  if (message.content.startsWith("!gm")) {
+  if (message.content.toLowerCase().startsWith("!gm")) {
     message.react("💞");
     message.react("🌅");
     message.reply(`Goood Morning ${message.author.username} 😘`);
