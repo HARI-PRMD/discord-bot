@@ -1,13 +1,13 @@
 import {
   ActivityType,
+  Constants,
   EmbedBuilder,
   Message,
 } from "discord.js";
 import { saveMap, userData } from "./data";
 import { client } from "./index";
 var colors = require("colors/safe");
-// constants
-const statusPrice = 20;
+import { statusPrice } from './contants'
 
 export function matchPFP(message: Message) {
   client.user?.setAvatar(message.author.avatarURL.toString());
