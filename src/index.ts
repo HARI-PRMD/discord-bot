@@ -25,9 +25,7 @@ export const client = new Client({
 });
 ////////////////////////////////////////////////////////////////////////////////
 client.login(process.env.TOKEN);
-// https://user-images.githubusercontent.com/100102134/197337179-c1b74c16-f2e1-46cd-85eb-6e686b5e8939.JPG
 client.on("ready", () => {
-  // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
   client.user?.setPresence({
     activities: [{ 
       name: "you study 🤫",

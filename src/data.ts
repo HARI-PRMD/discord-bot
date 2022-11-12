@@ -1,13 +1,6 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { addMinutes } from "date-fns";
 import { writeFileSync, readFileSync } from "fs";
 var colors = require('colors/safe');
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessages,
-  ],
-});
 ////////////////////////////////////////////////////////////////////////////////
 export interface UserData {
   users: User[];
@@ -19,11 +12,23 @@ export interface User {
   money: number;
 }
 
+export interface statusDetails {
+  startTime: Date;
+  endTime: Date;
+  user: string | null;
+};
+
 export let userData: UserData = {
   users: [],
 };
 
 export let girlsNames: Set<string> = new Set();
+
+export let statusDetails: statusDetails = {
+  startTime: new Date(),
+  endTime: addMinutes(new Date(), 30),
+  user: null
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 export function saveMap(): void {

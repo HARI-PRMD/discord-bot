@@ -1,15 +1,16 @@
 import {
   ActivityType,
-  Client,
+  Constants,
   EmbedBuilder,
-  GatewayIntentBits,
   Message,
 } from "discord.js";
 import { saveMap, userData } from "./data";
 import { client } from "./index";
 var colors = require("colors/safe");
+import { statusPrice } from './contants'
+import { addMinutes, differenceInMinutes, isPast } from "date-fns";
+import { statusDetails } from "./data";
 
-const statusPrice = 20;
 
 export function matchPFP(message: Message) {
   client.user?.setAvatar(message.author.avatarURL.toString());
@@ -32,6 +33,21 @@ export function matchStatus(message: Message) {
     message.reply(`maybe next time, you don't have enough balance in your account`);
     return;
   }
+  
+  if (isPast(statusDetails.endTime) || statusDetails.user === null) {
+    // if the end time is in the past then set a new start and end time
+    // from current moment in time
+    statusDetails.startTime = new Date();
+    statusDetails.endTime = addMinutes(statusDetails.startTime, 30);
+    statusDetails.user = message.author.username;
+    console.log(`${statusDetails.user} : ${statusDetails.startTime} --> ${statusDetails.endTime}`)
+  } else {
+    // if the status period is still running and end time is in the future
+    let timeLeft = differenceInMinutes(new Date(), statusDetails.endTime)
+    message.reply(`It's still ${statusDetails.user}'s turn in my status, please try again in ${timeLeft} minutes.`)
+    return;
+  }
+  
 
   user.money = user.money - statusPrice;
   client.user?.setPresence({
@@ -39,7 +55,6 @@ export function matchStatus(message: Message) {
       {
         name: `with ${message.author.username} 💞`,
         type: ActivityType.Playing,
-        url: "https://github.com/HARI-PRMD",
       },
     ],
     status: "online",
@@ -67,8 +82,6 @@ export function matchStatus(message: Message) {
     );
     message.channel.send(`Your DMs are disabled ${user?.nickname} 😔, guess you don't want me to talk to u privately 💔`);
   });
-    
-
   saveMap();
   return;
 }
