@@ -15,7 +15,7 @@ export interface User {
 export interface statusDetails {
   startTime: Date;
   endTime: Date;
-  user: string;
+  user: string | null;
 };
 
 export let userData: UserData = {
@@ -27,7 +27,7 @@ export let girlsNames: Set<string> = new Set();
 export let statusDetails: statusDetails = {
   startTime: new Date(),
   endTime: addMinutes(new Date(), 30),
-  user: 'Hehe'
+  user: null
 }
 
 ////////////////////////////////////////////////////////////////////////////////
