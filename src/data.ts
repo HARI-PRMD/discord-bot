@@ -1,13 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { writeFileSync, readFileSync } from "fs";
 var colors = require('colors/safe');
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessages,
-  ],
-});
 ////////////////////////////////////////////////////////////////////////////////
 export interface UserData {
   users: User[];
