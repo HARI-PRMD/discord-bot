@@ -1,20 +1,11 @@
-import { Client, EmbedBuilder, GatewayIntentBits, Message,  } from "discord.js";
+import { EmbedBuilder, Message } from "discord.js";
 import { saveMap, userData } from "./data";
 var colors = require("colors/safe");
-
-// const client = new Client({
-//   intents: [
-//     GatewayIntentBits.Guilds,
-//     GatewayIntentBits.MessageContent,
-//     GatewayIntentBits.GuildMessages,
-//   ],
-// });
 
 ////////////////////////////////////////////////////////////////////////////////
 export function messageHi(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
   if (user === undefined) {
-    // message.reply(`I DMed you something 😉`);
     message.reply(
       `Hiiii I don't think I've met you before 👀, please type \`!addme ${message.author.username}\` or any nickname you would like me to call you in the server chat 💞`
     );
@@ -34,7 +25,6 @@ export function messageHi(message: Message): void {
 export function messageGoodMorning(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
   if (user === undefined) {
-    // message.reply(`I DMed you something 😉`);
     message.reply(
       `Hiiii I don't think I've met you before 👀, please type \`!addme ${message.author.username}\` or any nickname you would like me to call you in the server chat 💞`
     );
@@ -109,9 +99,6 @@ export function messageAddMe(message: Message): void {
 export function messageWork(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
   if (user === undefined) {
-    // message.reply(
-    //   `You haven't even told me your name yet ${message.author.username} 😭, anyways I DMed you something pls read it 🥺`
-    // );
     message.reply(
       `Hiiii I don't think I've met you before 👀, if you would like to user my functions please type \`!addme ${message.author.username}\` or any nickname you would like me to call you in the server chat 💞`
     );
@@ -139,10 +126,6 @@ export function messageWork(message: Message): void {
 export function messageBalance(message: Message): void {
   let user = userData.users.find((x) => x.userId === message.author.id);
   if (user === undefined) {
-    message;
-    // message.reply(
-    //   `You haven't setup an account with your local simp bank ${message.author.username} 😭, anyways I DMed you something pls read it 🥺`
-    // );
     message.reply(
       `Hiiii I don't think I've met you before 👀, if you would like to user my functions please type \`!addme ${message.author.username}\` or any nickname you would like me to call you in the server chat 💞`
     );

@@ -1,14 +1,12 @@
 import {
   ActivityType,
-  Client,
   EmbedBuilder,
-  GatewayIntentBits,
   Message,
 } from "discord.js";
 import { saveMap, userData } from "./data";
 import { client } from "./index";
 var colors = require("colors/safe");
-
+// constants
 const statusPrice = 20;
 
 export function matchPFP(message: Message) {
@@ -67,8 +65,6 @@ export function matchStatus(message: Message) {
     );
     message.channel.send(`Your DMs are disabled ${user?.nickname} 😔, guess you don't want me to talk to u privately 💔`);
   });
-    
-
   saveMap();
   return;
 }
