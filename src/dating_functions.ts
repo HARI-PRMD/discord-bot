@@ -8,6 +8,9 @@ import { saveMap, userData } from "./data";
 import { client } from "./index";
 var colors = require("colors/safe");
 import { statusPrice } from './contants'
+import { addMinutes, isPast } from "date-fns";
+import { statusDetails } from "./data";
+
 
 export function matchPFP(message: Message) {
   client.user?.setAvatar(message.author.avatarURL.toString());
@@ -30,6 +33,20 @@ export function matchStatus(message: Message) {
     message.reply(`maybe next time, you don't have enough balance in your account`);
     return;
   }
+  
+  if (isPast(statusDetails.endTime)) {
+    // if the end time is in the past then set a new start and end time
+    // from current moment in time
+    statusDetails.startTime = new Date();
+    statusDetails.endTime = addMinutes(statusDetails.startTime, 30);
+    statusDetails.user = message.author.username;
+    console.log(`${statusDetails.user} : ${statusDetails.startTime} --> ${statusDetails.endTime}`)
+  } else {
+    // if the status period is still running and end time is in the future
+    let timeLeft = 101;
+    message.reply(`It's still ${statusDetails.user}'s turn in my status, please try again after ${statusDetails.endTime}.`)
+  }
+  
 
   user.money = user.money - statusPrice;
   client.user?.setPresence({
@@ -37,7 +54,6 @@ export function matchStatus(message: Message) {
       {
         name: `with ${message.author.username} 💞`,
         type: ActivityType.Playing,
-        url: "https://github.com/HARI-PRMD",
       },
     ],
     status: "online",
