@@ -65,9 +65,9 @@ client.on("messageCreate", (message) => {
     messageRule(message);
   }
 
-  // if (message.content.toLowerCase().includes("when") && message.content.toLowerCase().includes("feature") && message.content.toLowerCase().includes("chan")) {
-  //   message.reply(`Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`)
-  // }
+  if (message.content.toLowerCase().includes("when") && message.content.toLowerCase().includes("feature") && message.content.toLowerCase().includes("chan")) {
+    message.reply(`Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`)
+  }
 
   jealousBot(message);
 

@@ -2,8 +2,8 @@
   "users": [
     {
       "userId": "936843221127028766",
-      "nickname": "Hari",
-      "money": 60
+      "nickname": "MasterNyaNya",
+      "money": 80
     },
     {
       "userId": "233395102070865920",
@@ -58,16 +58,21 @@
     {
       "userId": "702396989417193482",
       "nickname": "KazuhaLover",
-      "money": 0
+      "money": 10
     },
     {
       "userId": "525652777775529994",
       "nickname": "pussyslayer69",
-      "money": 0
+      "money": 10
     },
     {
       "userId": "691599528666595371",
       "nickname": "SexyBeast",
+      "money": 30
+    },
+    {
+      "userId": "630578256470474763",
+      "nickname": "my little eggchamp",
       "money": 0
     }
   ]
