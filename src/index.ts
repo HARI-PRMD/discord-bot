@@ -60,14 +60,13 @@ client.on("messageCreate", (message) => {
     messageWork(message);
   }
   
-  if (message.content.toLowerCase().startsWith("!matchpfp")) {
-    console.log(message.author.avatar)
-    matchPFP(message);
-  }
-  
-  // if (message.content.toLowerCase().startsWith("!status")) {
-  //   matchStatus(message);
+  // if (message.content.toLowerCase().startsWith("!matchpfp")) {
+  //   matchPFP(message);
   // }
+  
+  if (message.content.toLowerCase().startsWith("!status")) {
+    matchStatus(message);
+  }
 
   if (message.content.toLowerCase().startsWith("!balance")) {
     messageBalance(message);
