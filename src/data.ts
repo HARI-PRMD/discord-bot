@@ -30,6 +30,12 @@ export let statusDetails: statusDetails = {
   user: null
 }
 
+export let pfpDetails: statusDetails = {
+  startTime: new Date(),
+  endTime: addMinutes(new Date(), 30),
+  user: null
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 export function saveMap(): void {
   const stringifiedUserData = JSON.stringify(userData, null, 2);
