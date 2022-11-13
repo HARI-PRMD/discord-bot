@@ -26,6 +26,7 @@ export const client = new Client({
 ////////////////////////////////////////////////////////////////////////////////
 client.login(process.env.TOKEN);
 client.on("ready", () => {
+  client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
   client.user?.setPresence({
     activities: [{ 
       name: "you study 🤫",
@@ -59,10 +60,9 @@ client.on("messageCreate", (message) => {
     messageWork(message);
   }
   
-  if (message.content.toLowerCase().startsWith("!matchPFP")) {
-    console.log(message.author.avatar)
-    matchPFP(message);
-  }
+  // if (message.content.toLowerCase().startsWith("!matchpfp")) {
+  //   matchPFP(message);
+  // }
   
   if (message.content.toLowerCase().startsWith("!status")) {
     matchStatus(message);

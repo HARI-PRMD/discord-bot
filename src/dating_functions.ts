@@ -4,16 +4,88 @@ import {
   EmbedBuilder,
   Message,
 } from "discord.js";
-import { saveMap, userData } from "./data";
+import { pfpDetails, saveMap, userData } from "./data";
 import { client } from "./index";
 var colors = require("colors/safe");
-import { statusPrice } from './contants'
-import { addMinutes, differenceInMinutes, isPast } from "date-fns";
+import { pfpPrice, statusPrice } from './contants'
+import { addHours, addMinutes, differenceInHours, differenceInMinutes, isPast } from "date-fns";
 import { statusDetails } from "./data";
 
 
 export function matchPFP(message: Message) {
-  client.user?.setAvatar(message.author.avatarURL.toString());
+  
+  let user = userData.users.find((x) => x.userId === message.author.id);
+  if (user === undefined) {
+    message.reply(
+      `Hiiii I don't think I've met you before 👀, please type \`!addme ${message.author.username}\` or any nickname you would like me to call you in the server chat 💞`
+    );
+    console.log(
+      colors.inverse.brightYellow(" PFP ") +
+      colors.brightYellow(`         ${message.author.username} ran pfp command as invalid user`)
+    );
+    return;
+  }
+
+  if (user.money < 50) {
+    message.reply(`maybe next time, you don't have enough balance in your account`);
+    return;
+  }
+  
+  if (isPast(pfpDetails.endTime) || pfpDetails.user === null) {
+    // if the end time is in the past then set a new start and end time
+    // from current moment in time
+    pfpDetails.startTime = new Date();
+    pfpDetails.endTime = addHours(statusDetails.startTime, 2);
+    pfpDetails.user = message.author.username;
+    console.log(`${statusDetails.user} : ${statusDetails.startTime} --> ${statusDetails.endTime}`)
+  } else {
+    // if the status period is still running and end time is in the future
+    let timeLeft = differenceInMinutes(pfpDetails.endTime, new Date())
+    if (timeLeft > 60) {
+      timeLeft = differenceInHours(pfpDetails.endTime, new Date())
+    }
+    message.reply(`It's still ${pfpDetails.user}'s turn in my status, please try again in ${timeLeft} minutes.`)
+    return;
+  }
+  
+
+  user.money = user.money - pfpPrice;
+  client.user?.setAvatar(message.author.displayAvatarURL());
+  client.user?.setPresence({
+    activities: [
+      {
+        name: `with ${message.author.username} 💞`,
+        type: ActivityType.Playing,
+      },
+    ],
+    status: "online",
+  });
+  message.channel.send(`Matching pfp and status with ${message.author.username} 🥰`);
+
+  const balanceEmbed = new EmbedBuilder()
+  .setColor([229, 161, 162])
+  .setTitle(`Receipt`)
+  .setDescription(`Thank you for your purchase 💞`)
+  .addFields(
+		{ name: 'You bought', value: ` 2 hours of matching pfp time for $${pfpPrice}.` },
+  )
+  .setTimestamp();
+  
+  message.author.send({ embeds: [balanceEmbed] }).then(() => {
+    console.log(
+      colors.inverse.brightGreen(" PFP ") +
+      colors.brightGreen(`         ${message.author.username} bought pfp time for $${pfpPrice}`)
+    );
+  }).catch(() => {
+    console.log(
+      colors.inverse.brightYellow(" PFP ") +
+      colors.brightYellow(`         tried DMing ${message.author.username} receipt for pfp time for $${pfpPrice}`)
+    );
+    message.channel.send(`Your DMs are disabled ${user?.nickname} 😔, guess you don't want me to talk to u privately 💔`);
+  });
+  saveMap();
+  return;
+
 }
 
 export function matchStatus(message: Message) {
@@ -23,8 +95,8 @@ export function matchStatus(message: Message) {
       `Hiiii I don't think I've met you before 👀, please type \`!addme ${message.author.username}\` or any nickname you would like me to call you in the server chat 💞`
     );
     console.log(
-      colors.inverse.brightYellow(" STATUS ") +
-      colors.brightYellow(`      ${message.author.username} ran status command as invalid user`)
+      colors.inverse.brightYellow(" PFP ") +
+      colors.brightYellow(`         ${message.author.username} ran match pfp command as invalid user`)
     );
     return;
   }
@@ -43,8 +115,8 @@ export function matchStatus(message: Message) {
     console.log(`${statusDetails.user} : ${statusDetails.startTime} --> ${statusDetails.endTime}`)
   } else {
     // if the status period is still running and end time is in the future
-    let timeLeft = differenceInMinutes(new Date(), statusDetails.endTime)
-    message.reply(`It's still ${statusDetails.user}'s turn in my status, please try again in ${timeLeft} minutes.`)
+    let timeLeft = differenceInMinutes(statusDetails.endTime, new Date())
+    message.reply(`It's still matching with ${statusDetails.user}, please try again in ${timeLeft} minutes.`)
     return;
   }
   
