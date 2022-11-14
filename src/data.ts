@@ -6,10 +6,16 @@ export interface UserData {
   users: User[];
 }
 
+type money = {
+  balance: number;
+  lastTimeWorked: number | null;
+  perHour: number;
+}
+
 export interface User {
   userId: string;
   nickname: string;
-  money: number;
+  money: money;
 }
 
 export interface statusDetails {
