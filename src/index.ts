@@ -56,7 +56,7 @@ client.on("messageCreate", (message) => {
     messageAddMe(message);
   }
 
-  if (message.content.toLowerCase().startsWith("!work")) {
+  if (message.content.toLowerCase().startsWith("!work") || message.content.toLowerCase().startsWith("!w")) {
     messageWork(message);
   }
   
@@ -68,7 +68,7 @@ client.on("messageCreate", (message) => {
     matchStatus(message);
   }
 
-  if (message.content.toLowerCase().startsWith("!balance")) {
+  if (message.content.toLowerCase().startsWith("!balance") || message.content.toLowerCase().startsWith("!bal")) {
     messageBalance(message);
   }
 

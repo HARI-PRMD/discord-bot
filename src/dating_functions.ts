@@ -26,7 +26,7 @@ export function matchPFP(message: Message) {
     return;
   }
 
-  if (user.money < 50) {
+  if (user.money.balance < 50) {
     message.reply(`maybe next time, you don't have enough balance in your account`);
     return;
   }
@@ -49,7 +49,7 @@ export function matchPFP(message: Message) {
   }
   
 
-  user.money = user.money - pfpPrice;
+  user.money.balance = user.money.balance - pfpPrice;
   client.user?.setAvatar(message.author.displayAvatarURL());
   client.user?.setPresence({
     activities: [
@@ -101,7 +101,7 @@ export function matchStatus(message: Message) {
     return;
   }
 
-  if (user.money < 20) {
+  if (user.money.balance < 20) {
     message.reply(`maybe next time, you don't have enough balance in your account`);
     return;
   }
@@ -121,7 +121,7 @@ export function matchStatus(message: Message) {
   }
   
 
-  user.money = user.money - statusPrice;
+  user.money.balance = user.money.balance - statusPrice;
   client.user?.setPresence({
     activities: [
       {

@@ -26,6 +26,5 @@ export function help(message: Message): void {
     },
 	)
 	.setFooter({ text: 'Made by @Hehe#6969', iconURL: 'attachment://hehe_pfp.png' });
-
   message.reply({ embeds: [helpEmbed], files: [heheChanPfp, hehePfp] });
 }
