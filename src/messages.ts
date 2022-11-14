@@ -121,10 +121,10 @@ export function messageWork(message: Message): void {
       user.money.lastTimeWorked = Date.now();
     }
     
-    if (user.money.perHour > totalTimeWorkPerHour && differenceInMinutes(user.money.lastTimeWorked, Date.now()) < 60) {
+    if (user.money.perHour > totalTimeWorkPerHour && differenceInMinutes(Date.now(), user.money.lastTimeWorked) < 60) {
       // if the user has already worked more than the total times within the hour
       // this tells them to try again later
-      const timeLeft: number = 60 - differenceInMinutes(user.money.lastTimeWorked, Date.now());
+      const timeLeft: number = 60 - differenceInMinutes( Date.now(), user.money.lastTimeWorked);
       message.reply(`You have already worked ${user.money.perHour} times this hour, please take care of yourself and try again in ${timeLeft} minutes!`)
       console.log(
         colors.inverse.brightYellow(" WORK ") +
@@ -135,7 +135,7 @@ export function messageWork(message: Message): void {
       return;
     }
 
-    if (differenceInMinutes(user.money.lastTimeWorked, Date.now()) > 60) {
+    if (differenceInMinutes(Date.now(), user.money.lastTimeWorked) > 60) {
       // if it has already been more than an hour
       user.money.lastTimeWorked = Date.now();
       user.money.perHour = 0;
