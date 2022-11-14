@@ -1,19 +1,31 @@
-import { Message } from "discord.js";
+import { AttachmentBuilder, Message } from "discord.js";
 import { EmbedBuilder } from "@discordjs/builders";
+import { pfpPrice, statusPrice } from "./contants";
 ////////////////////////////////////////////////////////////////////////////////
 export function help(message: Message): void {
-  const messageFunctions = `\`!hi\` - Hehe-chan greets you by your nickname or default username.
-\`!addme\` - have Hehe-chan call you a nickname as well as setup your bank account.
-\`!work\` - earn money to spend on Hehe-chan's functions.
-\`!balance\` - view your current bank balance.
-    `;
-  const helpEmbed = new EmbedBuilder().setTitle("so very poggers").addFields(
-    {
-      name: "message functions",
-      value: messageFunctions,
+  const heheChanPfp = new AttachmentBuilder('./assets/hehe_chan_pfp.jpg');
+  const hehePfp = new AttachmentBuilder('./assets/hehe_pfp.png');
+  const helpEmbed = new EmbedBuilder()
+	.setColor([229, 161, 162])
+	.setURL('https://github.com/HARI-PRMD')
+	.setAuthor({ name: `Hehe Chan's List of Commands`, iconURL: 'attachment://hehe_chan_pfp.jpg' })
+  .addFields(
+		{ name: 'Regular Functions', value:
+     `\`!hi\` - Greet Hehe Chan.\n` + 
+     `\`!gm\` - Rise and Shine Hehe Chan.\n` +
+     `\`!addme\` - Have Hehe Chan call you by your nickname, enables work and dating functions.\n` +
+     `\`!rule\` - Find out what the only rule on Hehe's server is.\n`
     },
-    { name: "e-?????? functions", value: "sadf" },
-    { name: "money functions", value: "sdfd" }
-  );
-  message.reply({ embeds: [helpEmbed] });
+		{ name: 'Money Functions', value:
+     `\`!work\` - Earn money to spend on Hehe Chan's e-dating functions.\n` + 
+     `\`!balance\` - Check your current balance.\n` 
+    },
+		{ name: 'E-Dating Functions', value:
+     `\`!status\` - Have your name in Hehe Chan's status for 30 mins, cost: $${statusPrice}.\n` + 
+     `\`!matchpfp\` - Removed due to moral concerns, cost: $${pfpPrice}.\n` 
+    },
+	)
+	.setFooter({ text: 'Made by @Hehe#6969', iconURL: 'attachment://hehe_pfp.png' });
+
+  message.reply({ embeds: [helpEmbed], files: [heheChanPfp, hehePfp] });
 }

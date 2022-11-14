@@ -26,10 +26,10 @@ export const client = new Client({
 ////////////////////////////////////////////////////////////////////////////////
 client.login(process.env.TOKEN);
 client.on("ready", () => {
-  client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
+  // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
   client.user?.setPresence({
     activities: [{ 
-      name: "you study 🤫",
+      name: "Hehe code 👨‍💻",
       type: ActivityType.Watching,
       url: 'https://github.com/HARI-PRMD'
    }],
