@@ -1,6 +1,6 @@
 // bot code time !
 // import * as dotenv from "dotenv";
-import { Client, GatewayIntentBits, ActivityType } from "discord.js";
+import { Client, GatewayIntentBits, ActivityType, Message } from "discord.js";
 import {
   messageAddMe,
   messageBalance,
@@ -28,11 +28,13 @@ client.login(process.env.TOKEN);
 client.on("ready", () => {
   // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
   client.user?.setPresence({
-    activities: [{ 
-      name: "Hehe code 👨‍💻",
-      type: ActivityType.Watching,
-      url: 'https://github.com/HARI-PRMD'
-   }],
+    activities: [
+      {
+        name: "Hehe code 👨‍💻",
+        type: ActivityType.Watching,
+        url: "https://github.com/HARI-PRMD",
+      },
+    ],
     status: "online",
   });
   console.log(
@@ -56,19 +58,25 @@ client.on("messageCreate", (message) => {
     messageAddMe(message);
   }
 
-  if (message.content.toLowerCase().startsWith("!work") || message.content.toLowerCase().startsWith("!w")) {
+  if (
+    message.content.toLowerCase().startsWith("!work") ||
+    message.content.toLowerCase() === "!w"
+  ) {
     messageWork(message);
   }
-  
+
   // if (message.content.toLowerCase().startsWith("!matchpfp")) {
   //   matchPFP(message);
   // }
-  
+
   if (message.content.toLowerCase().startsWith("!status")) {
     matchStatus(message);
   }
 
-  if (message.content.toLowerCase().startsWith("!balance") || message.content.toLowerCase().startsWith("!bal")) {
+  if (
+    message.content.toLowerCase().startsWith("!balance") ||
+    message.content.toLowerCase().startsWith("!bal")
+  ) {
     messageBalance(message);
   }
 
@@ -104,6 +112,7 @@ client.on("messageCreate", (message) => {
     );
   }
 });
+
 ////////////////////////////////////////////////////////////////////////////////
 // process.on("SIGINT", () => {
 //   saveMap();
