@@ -1,6 +1,13 @@
 // bot code time !
 // import * as dotenv from "dotenv";
-import { Client, GatewayIntentBits, ActivityType, Message } from "discord.js";
+import {
+  Client,
+  GatewayIntentBits,
+  ActivityType,
+  Partials,
+  Message,
+} from "discord.js";
+// my functions:
 import {
   messageAddMe,
   messageBalance,
@@ -12,15 +19,20 @@ import { loadMap } from "./data";
 import { help } from "./help";
 import { jealousBot } from "./jealous";
 import { matchPFP, matchStatus } from "./dating_functions";
+import { goodMorningRegex, goodNightRegex } from "./contants";
+import { DMfunctions, guildFunctions } from "./bot_functions_list";
 var colors = require("colors/safe");
 
 require("dotenv").config();
 
 export const client = new Client({
+  partials: [Partials.Channel, Partials.User, Partials.Message],
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.DirectMessageTyping,
   ],
 });
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,73 +55,13 @@ client.on("ready", () => {
   );
   loadMap();
 });
-// process.on("SIGINT", () => {
-//   console.log("LMAO");
-//   server.close()
 
-// })
-
-client.on("messageCreate", (message) => {
-  if (message.content.toLowerCase().startsWith("!hi")) {
-    messageHi(message);
+client.on("messageCreate", (message: Message) => {
+  if (message.channel.isDMBased()) {
+    DMfunctions(message);
   }
-
-  if (message.content.toLowerCase().startsWith("!addme")) {
-    messageAddMe(message);
-  }
-
-  if (
-    message.content.toLowerCase().startsWith("!work") ||
-    message.content.toLowerCase() === "!w"
-  ) {
-    messageWork(message);
-  }
-
-  // if (message.content.toLowerCase().startsWith("!matchpfp")) {
-  //   matchPFP(message);
-  // }
-
-  if (message.content.toLowerCase().startsWith("!status")) {
-    matchStatus(message);
-  }
-
-  if (
-    message.content.toLowerCase().startsWith("!balance") ||
-    message.content.toLowerCase().startsWith("!bal")
-  ) {
-    messageBalance(message);
-  }
-
-  if (message.content.toLowerCase().startsWith("!help")) {
-    help(message);
-  }
-
-  if (message.content.toLowerCase().startsWith("!rule")) {
-    messageRule(message);
-  }
-
-  if (message.content.toLowerCase().startsWith("!gm")) {
-    message.react("💞");
-    message.react("🌅");
-    message.reply(`Goood Morning ${message.author.username} 😘`);
-  }
-
-  if (
-    message.content.toLowerCase().includes("when") &&
-    message.content.toLowerCase().includes("feature") &&
-    message.content.toLowerCase().includes("chan")
-  ) {
-    message.reply(
-      `Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`
-    );
-  }
-
-  jealousBot(message);
-
-  if (message.mentions.has("1031072718570922014")) {
-    message.channel.send(
-      `Baka ${message.author.username} 🏓🤨 I'm not ready yet!`
-    );
+  if (!message.channel.isDMBased()) {
+    guildFunctions(message);
   }
 });
 

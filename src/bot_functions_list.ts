@@ -1,0 +1,92 @@
+import { Message } from "discord.js";
+import { client } from "./index";
+import { goodMorningRegex, goodNightRegex } from "./contants";
+import { matchStatus } from "./dating_functions";
+import { help } from "./help";
+import { jealousBot } from "./jealous";
+import {
+  messageAddMe,
+  messageBalance,
+  messageHi,
+  messageRule,
+  messageWork,
+} from "./messages";
+
+// guild functions
+export function guildFunctions(message: Message) {
+  const messageLower = message.content.toLowerCase();
+  if (messageLower.startsWith("!hi")) {
+    messageHi(message);
+  }
+
+  if (messageLower.startsWith("!addme")) {
+    messageAddMe(message);
+  }
+
+  if (messageLower.startsWith("!work") || messageLower === "!w") {
+    messageWork(message);
+  }
+
+  // if (message.content.toLowerCase().startsWith("!matchpfp")) {
+  //   matchPFP(message);
+  // }
+
+  if (messageLower.startsWith("!status")) {
+    matchStatus(message);
+  }
+
+  if (messageLower.startsWith("!balance") || messageLower.startsWith("!bal")) {
+    messageBalance(message);
+  }
+
+  if (messageLower.startsWith("!help")) {
+    help(message);
+  }
+
+  if (messageLower.startsWith("!rule")) {
+    messageRule(message);
+  }
+
+  if (messageLower.startsWith("!gm")) {
+    message.react("💞");
+    message.react("🌅");
+    message.reply(`Goood Morning ${message.author.username} 😘`);
+  }
+
+  if (
+    messageLower.includes("when") &&
+    messageLower.includes("feature") &&
+    messageLower.includes("chan")
+  ) {
+    message.reply(
+      `Hehe is working very hard on my features I will be ready soon 🥺. Here is some live footage of him https://cdn.discordapp.com/attachments/724735616490668072/1039072709818204190/Work.mp4`
+    );
+  }
+
+  jealousBot(message);
+
+  if (message.mentions.has("1031072718570922014")) {
+    message.channel.send(
+      `Baka ${message.author.username} 🏓🤨 I'm not ready yet!`
+    );
+  }
+}
+
+export function DMfunctions(message: Message) {
+  if (
+    message.content.search(goodMorningRegex) !== -1 &&
+    message.author.id !== client.user?.id
+  ) {
+    console.log(`good morning ${message.author.username} 😎`);
+    message.reply(`good morning ${message.author.username} 😎`);
+    return;
+  }
+  if (
+    message.content.search(goodNightRegex) !== -1 &&
+    message.author.id !== client.user?.id
+  ) {
+    console.log(`good night ${message.author.username} 😴`);
+    message.reply(`good night ${message.author.username} 😴`);
+    return;
+  }
+}
