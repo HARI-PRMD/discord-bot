@@ -7,21 +7,8 @@ import {
   Partials,
   Message,
 } from "discord.js";
-// my functions:
-import {
-  messageAddMe,
-  messageBalance,
-  messageHi,
-  messageRule,
-  messageWork,
-} from "./messages";
-import { loadMap } from "./data";
-import { help } from "./help";
-import { jealousBot } from "./jealous";
-import { matchPFP, matchStatus } from "./dating_functions";
-import { goodMorningRegex, goodNightRegex } from "./contants";
-import { DMfunctions, guildFunctions } from "./bot_functions_list";
-var colors = require("colors/safe");
+import { DMfunctions, guildFunctions, runOnStart } from "./bot_functions_list";
+import { goodMorningConversation } from "./dm_conversation";
 
 require("dotenv").config();
 
@@ -38,33 +25,56 @@ export const client = new Client({
 ////////////////////////////////////////////////////////////////////////////////
 client.login(process.env.TOKEN);
 client.on("ready", () => {
-  // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
-  client.user?.setPresence({
-    activities: [
-      {
-        name: "Hehe code 👨‍💻",
-        type: ActivityType.Watching,
-        url: "https://github.com/HARI-PRMD",
-      },
-    ],
-    status: "online",
-  });
-  console.log(
-    colors.inverse.brightGreen(" LOGGED IN ") +
-      colors.brightGreen(`   Logged in as ${client.user!.tag}!`)
-  );
-  loadMap();
+  runOnStart();
 });
 
+// client.on("message", async (message: Message) => {
+//   if (!message.guild) return;
+//   if (message.author.bot) return;
+//   try {
+//     if (message.channel.id != "1031080328753840242") return;
+//     let response: string = await goodMorningConversation(message);
+//     message.reply(response);
+//   } catch (err) {
+//     throw new Error(`error occured: ${err}`);
+//   }
+// });
+
+// client.on("messageCreate", async (message: Message) => {
+//   if (!message.guild) return;
+//   if (message.author.bot) return;
+//   try {
+//     if (message.channel.id != message.channelId) return;
+//     let res = await goodMorningConversation(message);
+//     // let res = "Hi";
+//     console.log(message);
+//     message.reply(res);
+//   } catch {
+//     console.log(`Bot error, please try again!`, message);
+//   }
+// });
+
+// client.on("messageCreate", async (message: Message) => {
+//   if (message.author.bot) return;
+//   // if (message.channel.isDMBased()) {
+//   //   await DMfunctions(message);
+//   //   return;
+//   // }
+//   if (!message.channel.isDMBased()) {
+//     await guildFunctions(message);
+//     return;
+//   }
+// });
 client.on("messageCreate", (message: Message) => {
-  if (message.channel.isDMBased()) {
-    DMfunctions(message);
-  }
+  if (message.author.bot) return;
+  // if (message.channel.isDMBased()) {
+  //   await DMfunctions(message);
+  //   return;
+  // }
   if (!message.channel.isDMBased()) {
     guildFunctions(message);
   }
 });
-
 ////////////////////////////////////////////////////////////////////////////////
 // process.on("SIGINT", () => {
 //   saveMap();

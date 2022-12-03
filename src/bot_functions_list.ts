@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { ActivityType, Message } from "discord.js";
 import { client } from "./index";
 import { goodMorningRegex, goodNightRegex } from "./contants";
 import { matchStatus } from "./dating_functions";
@@ -11,6 +11,28 @@ import {
   messageRule,
   messageWork,
 } from "./messages";
+import { loadMap } from "./data";
+import { goodMorningConversation } from "./dm_conversation";
+var colors = require("colors/safe");
+
+export function runOnStart() {
+  // client.user?.setAvatar('./assets/hehe_chan_pfp.jpg');
+  client.user?.setPresence({
+    activities: [
+      {
+        name: "Hehe cry while coding 👨‍💻",
+        type: ActivityType.Watching,
+        url: "https://github.com/HARI-PRMD",
+      },
+    ],
+    status: "online",
+  });
+  console.log(
+    colors.inverse.brightGreen(" LOGGED IN ") +
+      colors.brightGreen(`   Logged in as ${client.user!.tag}!`)
+  );
+  loadMap();
+}
 
 // guild functions
 export function guildFunctions(message: Message) {
@@ -72,19 +94,22 @@ export function guildFunctions(message: Message) {
   }
 }
 
-export function DMfunctions(message: Message) {
-  if (
-    message.content.search(goodMorningRegex) !== -1 &&
-    message.author.id !== client.user?.id
-  ) {
-    console.log(`good morning ${message.author.username} 😎`);
-    message.reply(`good morning ${message.author.username} 😎`);
-    return;
+export async function DMfunctions(message: Message) {
+  try {
+    if (message.channel.id != message.channelId) return;
+    let res = await goodMorningConversation(message);
+    message.channel.send(res);
+  } catch {
+    console.log(`Bot error, please try again!`, message);
   }
-  if (
-    message.content.search(goodNightRegex) !== -1 &&
-    message.author.id !== client.user?.id
-  ) {
+  // if (message.content.search(goodMorningRegex) !== -1) {
+  //   console.log(
+  //     `started good morning conversation with ${message.author.username} 😎`
+  //   );
+  //   message.reply(`good morning ${message.author.username} 😎`);
+  //   return;
+  // }
+  if (message.content.search(goodNightRegex) !== -1) {
     console.log(`good night ${message.author.username} 😴`);
     message.reply(`good night ${message.author.username} 😴`);
     return;
