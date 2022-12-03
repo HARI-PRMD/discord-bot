@@ -74,8 +74,6 @@ export function guildFunctions(message: Message) {
     message.react("🌅");
     message.reply(`Goood Morning ${message.author.username} 😘`);
   }
-  if (true) {
-  }
 
   if (
     messageLower.includes("when") &&
