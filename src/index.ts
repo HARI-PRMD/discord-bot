@@ -8,7 +8,6 @@ import {
   Message,
 } from "discord.js";
 import { DMfunctions, guildFunctions, runOnStart } from "./bot_functions_list";
-import { goodMorningConversation } from "./dm_conversation";
 
 require("dotenv").config();
 

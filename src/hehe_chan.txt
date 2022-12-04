@@ -1,4 +1,0 @@
-1 Are you feeling refreshed? [3,7]
-3 In the dark -> 4
-4 Yes, I suppose it is -> 5
-5 Hello again, nice to see you

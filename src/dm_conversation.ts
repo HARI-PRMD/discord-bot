@@ -1,21 +1,22 @@
 import { Message } from "discord.js";
-import { goodMorningRegex } from "./contants";
-// import { goodMorningStory } from "./conversation_trees";
+var spawn = require("child_process").spawn;
 
-export async function goodMorningConversation(message: Message): Promise<any> {
-  var spawn = require("child_process").spawn;
-
+export async function dmConversation(message: Message) {
+  let botReply: string;
   var process = spawn("python3", [
-    "./src/hehe-chan-ai/pytorch-chatbot/chat.py ",
+    "./src/hehe-chan-ai/pytorch-chatbot/chat.py",
     message.content,
   ]);
-  let reply: string[] = [];
 
   process.stdout.on("data", function (data: any) {
-    reply.push(data.toString());
+    botReply = data.toString();
   });
 
-  console.log("message: " + message.content);
-  console.log("reply: " + reply);
-  return "Hehe";
+  process.on("close", (code: any) => {
+    message.channel.sendTyping();
+    console.log();
+    setTimeout(() => {
+      message.channel.send(botReply);
+    }, 500);
+  });
 }

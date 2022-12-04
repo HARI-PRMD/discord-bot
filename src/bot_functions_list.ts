@@ -12,7 +12,7 @@ import {
   messageWork,
 } from "./messages";
 import { loadMap } from "./data";
-import { goodMorningConversation } from "./dm_conversation";
+import { dmConversation } from "./dm_conversation";
 var colors = require("colors/safe");
 
 export function runOnStart() {
@@ -96,23 +96,8 @@ export function guildFunctions(message: Message) {
 
 export async function DMfunctions(message: Message) {
   try {
-    // if (message.channel.id != message.channelId) return;
-    let res = await goodMorningConversation(message);
-    console.log("res: " + res);
-    message.channel.send(res);
+    dmConversation(message);
   } catch {
-    console.log(`Bot error, please try again!`, message);
-  }
-  // if (message.content.search(goodMorningRegex) !== -1) {
-  //   console.log(
-  //     `started good morning conversation with ${message.author.username} 😎`
-  //   );
-  //   message.reply(`good morning ${message.author.username} 😎`);
-  //   return;
-  // }
-  if (message.content.search(goodNightRegex) !== -1) {
-    console.log(`good night ${message.author.username} 😴`);
-    message.reply(`good night ${message.author.username} 😴`);
-    return;
+    console.log(`Bot AI component error: `, message);
   }
 }

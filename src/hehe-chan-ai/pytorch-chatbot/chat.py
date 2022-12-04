@@ -24,7 +24,8 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
 # sentence = "do you use credit cards?"
-sentence = sys.argv[1]
+sentence = sys.argv[1:]
+sentence = ' '.join(sentence)
 # sentence = "Hi"
 
 # def returnReply(sentence):
@@ -48,7 +49,7 @@ if prob.item() > 0.75:
         if tag == intent["tag"]:
             print(f"{random.choice(intent['responses'])}")
 else:
-    print(f"I do not understand...")
+    print("I do not understand...")
 
 
 # returnReply(sentence)

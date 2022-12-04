@@ -3,23 +3,27 @@
     {
       "tag": "greeting",
       "patterns": [
+        "wassup",
+        "yo",
         "Hi",
         "Hey",
         "How are you",
         "Is anyone there?",
         "Hello",
-        "Good day"
+        "Good day",
+        "Good morning",
+        "Hi Hehe Chan",
+        "How are you doing?"
       ],
       "responses": [
-        "Hey :-)",
-        "Hello, thanks for visiting",
-        "Hi there, what can I do for you?",
-        "Hi there, how can I help?"
+        "Helloo 🥰",
+        "Hi there ~ ❤️!",
+        "Haii, how are you doing?"
       ]
     },
     {
       "tag": "goodbye",
-      "patterns": ["Bye", "See you later", "Goodbye"],
+      "patterns": ["Bye", "See you later", "Goodbye", "Good Night", "gn!"],
       "responses": [
         "See you later, thanks for visiting",
         "Have a nice day",
@@ -28,8 +32,8 @@
     },
     {
       "tag": "thanks",
-      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
-      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!", "ty"],
+      "responses": ["🥺", "Any time for you 💞", "My pleasure"]
     },
     {
       "tag": "items",
@@ -39,8 +43,7 @@
         "What do you sell?"
       ],
       "responses": [
-        "We sell coffee and tea",
-        "We have coffee and tea"
+        "I have some e-dating services if you are interested 😳"
       ]
     },
     {
@@ -49,23 +52,26 @@
         "Do you take credit cards?",
         "Do you accept Mastercard?",
         "Can I pay with Paypal?",
-        "Are you cash only?"
+        "Are you cash only?",
+        "what currency do you accept?",
+        "how can I pay you?"
       ],
       "responses": [
-        "We accept VISA, Mastercard and Paypal",
-        "We accept most major credit cards, and Paypal"
+        "I accept my virtual currency you can get by typing `!work` ",
+        "I only accept my virtual currency called Hehe coins? I don't think we have a name for it yet Hehehe"
       ]
     },
     {
-      "tag": "delivery",
+      "tag": "services",
       "patterns": [
-        "How long does delivery take?",
-        "How long does shipping take?",
-        "When do I get my delivery?"
+        "What services can you provide?",
+        "what do you do?",
+        "what can I do with your money?",
+        "what dating functions do you provide?"
       ],
       "responses": [
-        "Delivery takes 2-4 days",
-        "Shipping takes 2-4 days"
+        "All my dating functions are listed out when you type `!help` in a server 😉",
+        "please type `!help` in any server to find out!"
       ]
     },
     {
@@ -76,8 +82,8 @@
         "Do you know a joke?"
       ],
       "responses": [
-        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-        "What did the buffalo say when his son left for college? Bison."
+        "your life is a joke",
+        "Go look in the mirror"
       ]
     }
   ]
