@@ -96,8 +96,9 @@ export function guildFunctions(message: Message) {
 
 export async function DMfunctions(message: Message) {
   try {
-    if (message.channel.id != message.channelId) return;
+    // if (message.channel.id != message.channelId) return;
     let res = await goodMorningConversation(message);
+    console.log("res: " + res);
     message.channel.send(res);
   } catch {
     console.log(`Bot error, please try again!`, message);

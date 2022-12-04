@@ -4,8 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node .",
-    "dev": "nodemon ./src/index.ts"
+    "start": "tsc && node ."
   },
   "keywords": [],
   "author": "",

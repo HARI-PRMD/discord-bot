@@ -1,10 +1,9 @@
-import random
-import json
-
-import torch
-
-from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
+from model import NeuralNet
+import torch
+import json
+import random
+import sys
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -24,14 +23,13 @@ model_state = data["model_state"]
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
+# sentence = "do you use credit cards?"
+sentence = sys.argv[1]
 
-bot_name = "Sam"
-print("Let's chat! (type 'quit' to exit)")
-while True:
-    # sentence = "do you use credit cards?"
-    sentence = input("You: ")
-    if sentence == "quit":
-        break
+
+def returnReply(sentence):
+    if sentence == "bye":
+        print(jsonify({'message': 'bye'}))
 
     sentence = tokenize(sentence)
     X = bag_of_words(sentence, all_words)
@@ -48,6 +46,10 @@ while True:
     if prob.item() > 0.75:
         for intent in intents['intents']:
             if tag == intent["tag"]:
-                print(f"{bot_name}: {random.choice(intent['responses'])}")
+                print(
+                    jsonify({'message': f"{random.choice(intent['responses'])}"}))
     else:
-        print(f"{bot_name}: I do not understand...")
+        print(jsonify({'message': f"I do not understand..."}))
+
+
+returnReply(sentence)
