@@ -5,26 +5,17 @@ import { goodMorningRegex } from "./contants";
 export async function goodMorningConversation(message: Message): Promise<any> {
   var spawn = require("child_process").spawn;
 
-  var process = spawn("python", [
+  var process = spawn("python3", [
     "./src/hehe-chan-ai/pytorch-chatbot/chat.py ",
     message.content,
   ]);
-  let reply = "";
+  let reply: string[] = [];
+
   process.stdout.on("data", function (data: any) {
-    reply = data.toString();
+    reply.push(data.toString());
   });
 
-  // const sensor = spawn("python", [
-  //   "./hehe-chan-ai/pytorch-chatbot/chat.py",
-  //   message.content,
-  // ]);
-
-  // sensor.stdout.on("data", function (data: string) {
-  //   // convert Buffer object to String
-  //   reply.push(JSON.stringify(data));
-  // });
-
-  console.log(message.content);
-  console.log(reply);
+  console.log("message: " + message.content);
+  console.log("reply: " + reply);
   return "Hehe";
 }

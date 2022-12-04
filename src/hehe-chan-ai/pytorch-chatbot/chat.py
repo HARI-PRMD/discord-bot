@@ -7,10 +7,10 @@ import sys
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-with open('intents.json', 'r') as json_data:
+with open('./src/hehe-chan-ai/pytorch-chatbot/intents.json', 'r') as json_data:
     intents = json.load(json_data)
 
-FILE = "data.pth"
+FILE = "./src/hehe-chan-ai/pytorch-chatbot/data.pth"
 data = torch.load(FILE)
 
 input_size = data["input_size"]
@@ -25,31 +25,30 @@ model.load_state_dict(model_state)
 model.eval()
 # sentence = "do you use credit cards?"
 sentence = sys.argv[1]
+# sentence = "Hi"
+
+# def returnReply(sentence):
+if sentence == "bye":
+    print('bye')
+
+sentence = tokenize(sentence)
+X = bag_of_words(sentence, all_words)
+X = X.reshape(1, X.shape[0])
+X = torch.from_numpy(X).to(device)
+
+output = model(X)
+_, predicted = torch.max(output, dim=1)
+
+tag = tags[predicted.item()]
+
+probs = torch.softmax(output, dim=1)
+prob = probs[0][predicted.item()]
+if prob.item() > 0.75:
+    for intent in intents['intents']:
+        if tag == intent["tag"]:
+            print(f"{random.choice(intent['responses'])}")
+else:
+    print(f"I do not understand...")
 
 
-def returnReply(sentence):
-    if sentence == "bye":
-        print(jsonify({'message': 'bye'}))
-
-    sentence = tokenize(sentence)
-    X = bag_of_words(sentence, all_words)
-    X = X.reshape(1, X.shape[0])
-    X = torch.from_numpy(X).to(device)
-
-    output = model(X)
-    _, predicted = torch.max(output, dim=1)
-
-    tag = tags[predicted.item()]
-
-    probs = torch.softmax(output, dim=1)
-    prob = probs[0][predicted.item()]
-    if prob.item() > 0.75:
-        for intent in intents['intents']:
-            if tag == intent["tag"]:
-                print(
-                    jsonify({'message': f"{random.choice(intent['responses'])}"}))
-    else:
-        print(jsonify({'message': f"I do not understand..."}))
-
-
-returnReply(sentence)
+# returnReply(sentence)
