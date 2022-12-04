@@ -14,7 +14,7 @@ export async function dmConversation(message: Message) {
 
   process.on("close", (code: any) => {
     message.channel.sendTyping();
-    console.log();
+    console.log(`talking with ${message.author.username}.`);
     setTimeout(() => {
       message.channel.send(botReply);
     }, 500);
