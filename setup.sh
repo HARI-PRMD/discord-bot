@@ -13,5 +13,3 @@ activate () {
   . src/hehe-chan-ai/bot/bin/activate
 }
 activate
-
-
