@@ -7,7 +7,11 @@ import {
   Partials,
   Message,
 } from "discord.js";
-import { DMfunctions, guildFunctions, runOnStart } from "./bot_functions_list";
+import {
+  DMfunctions,
+  guildFunctions,
+  runOnStart,
+} from "./bot-functions/bot_functions_list";
 
 require("dotenv").config();
 

@@ -1,5 +1,5 @@
 import { ActivityType, Message } from "discord.js";
-import { client } from "./index";
+import { client } from "../index";
 import { goodMorningRegex, goodNightRegex } from "./contants";
 import { matchStatus } from "./dating_functions";
 import { help } from "./help";
