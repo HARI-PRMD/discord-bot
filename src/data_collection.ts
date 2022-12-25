@@ -1,3 +1,5 @@
-import { Message } from "discord.js";
+import { messageData, saveMessages } from "./data";
 
-export function collectDmData(message: Message, reply: Message) {}
+export function collectDmData(message: string, reply: string) {
+  messageData.push({ message, reply });
+}

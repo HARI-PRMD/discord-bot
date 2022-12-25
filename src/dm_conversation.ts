@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+import { collectDmData } from "./data_collection";
 var spawn = require("child_process").spawn;
 
 export async function dmConversation(message: Message) {
@@ -18,5 +19,6 @@ export async function dmConversation(message: Message) {
     setTimeout(() => {
       message.channel.send(botReply);
     }, 500);
+    collectDmData(message.content, botReply);
   });
 }
