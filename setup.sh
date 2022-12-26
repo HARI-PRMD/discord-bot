@@ -36,8 +36,8 @@ echo 'Created .env file with token';
     python3 - << EOF
 import nltk
 nltk.download('punkt')
-EOF
-    echo 'Installed nltk punkt tokeniser';
+EOF &>/dev/null;
+  echo 'Installed nltk punkt tokeniser';
   echo 'Training bot'
   python train.py &>/dev/null;
   echo 'Bot trained on given intents'
@@ -54,11 +54,10 @@ sleep 1;
 echo 'Installing Node Modules'
 npm install &>/dev/null;
 echo 'installed'
-echo '    "colors": "^1.4.0",
-    "date-fns": "^2.29.3",
-    "discord.js": "^14.6.0",
-    "dotenv": "^16.0.3"
-'
+echo '"colors": "^1.4.0",
+"date-fns": "^2.29.3",
+"discord.js": "^14.6.0",
+"dotenv": "^16.0.3"'
 (
   echo 'Creating Data Files'
   cd 'data'
