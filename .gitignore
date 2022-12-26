@@ -275,3 +275,5 @@ cython_debug/
 bot/
 
 .env
+
+data.pth
