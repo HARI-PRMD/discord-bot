@@ -1,16 +1,46 @@
 # Typescript x Python E-Girl Discord Bot
 
-A Discord bot that is equipped with multiple chat functions for both guilds and dms.
+A Discord bot equipped with multiple chat functions for both guilds and dms.
 
 ## Initial setup
 
 Run the following command in your terminal
+
+MAC/Linux
 
 ```bash
   git clone https://github.com/HARI-PRMD/discord-bot.git
   cd discord-bot
   source setup.sh
 ```
+
+Windows
+
+```bash
+  npm install
+  cd src/hehe-chan-ai/
+  python3 -m venv bot
+  bot\Scripts\activate
+  pip install nltk
+  pip install numpy
+  pip install torch
+  python
+```
+
+Then type for punkt tokenizer
+
+```python
+  >>> import nltk
+  >>> nltk.download('punkt')
+  >>> quit()
+```
+
+then
+
+```bash
+  python train.py
+```
+
 
 > This will Install all the packages needed for the python ai component
 > as well as the typescript components in an environment.
@@ -48,4 +78,4 @@ Apart from this you can train the bot by updating [intents.json](src/hehe-chan-a
 
 ## Acknowledgments
 
-I would like to thank
+I would like to thank ![Patrick Loeber](https://github.com/patrickloeber) for his implementation of the pytorch component of my bot.
