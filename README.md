@@ -78,4 +78,4 @@ Apart from this you can train the bot by updating [intents.json](src/hehe-chan-a
 
 ## Acknowledgments
 
-I would like to thank ![Patrick Loeber](https://github.com/patrickloeber) for his implementation of the pytorch component of my bot.
+I would like to thank [Patrick Loeber](https://github.com/patrickloeber) for his implementation of the pytorch component of my bot.
