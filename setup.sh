@@ -16,7 +16,7 @@ else
   touch .env
   echo "TOKEN=\"$token\"" > .env;
 fi
-sleep 2;
+sleep 1;
 echo 'Created .env file with token'
 
 
@@ -35,7 +35,7 @@ echo 'Created .env file with token'
   echo 'Installed numpy'
   pip install torch &>/dev/null;
   echo 'Installed torch'
-  sleep 2;
+  sleep 1;
   echo 'Training bot'
   python3 train.py &>/dev/null;
   echo 'Bot trained on given intents'
@@ -65,9 +65,9 @@ then
   echo 'Staring bot server'
   npm run start;
 else
-  sleep 2;
+  sleep 1;
+  echo 'setup complete'
+  sleep 1;
   echo 'Use the following command to start your bot';
   echo 'npm run start';
 fi
-sleep 2;
-echo 'setup complete'
