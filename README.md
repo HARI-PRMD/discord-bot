@@ -18,7 +18,7 @@ Windows
 
 ```bash
   npm install
-  cd src/hehe-chan-ai/
+  cd src\hehe-chan-ai\
   python3 -m venv bot
   bot\Scripts\activate
   pip install nltk
