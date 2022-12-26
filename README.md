@@ -25,9 +25,10 @@ final loss.
 ## Functions
 
 type `!help` in a server to get a full list of guild functions.
-![functions](./bot-functions.png)
 
-Apart from this you can train the bot by updating intents in the following way:
+<img src="./bot-functions.png"  width="60%">
+
+Apart from this you can train the bot by updating [intents.json](src/hehe-chan-ai/intents.json). Just define a new `tag`, possible `patterns`, and possible `responses` for the chat bot. You have to re-run the training whenever this file is modified.
 
 ```json
 {
@@ -39,7 +40,12 @@ Apart from this you can train the bot by updating intents in the following way:
   ],
   "responses": [
     "Hello there!",
-    "👋"
+    "👋",
+    "Hi, what can I do for you?"
   ]
 },
 ```
+
+## Acknowledgments
+
+I would like to thank
