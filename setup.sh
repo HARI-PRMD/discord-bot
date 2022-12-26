@@ -17,56 +17,60 @@ else
   echo "TOKEN=\"$token\"" > .env;
 fi
 sleep 1;
-echo 'Created .env file with token'
-
-
+echo 'Created .env file with token';
 # Python Processes
 # Creating Environment
 (
   cd src/hehe-chan-ai/;
-  python3 -m venv bot;
+  python -m venv bot;
   . bot/bin/activate;
-  echo 'Downloading Python dependencies for AI Component'
+  echo 'Downloading Python dependencies for AI Component';
   
-  echo 'Installing Python Modules'
-  pip install nltk &>/dev/null;
-  echo 'Installed nltk'
-  pip install numpy &>/dev/null;
-  echo 'Installed numpy'
-  pip install torch &>/dev/null;
-  echo 'Installed torch'
-  sleep 1;
+  echo 'Installing Python Modules';
+    pip install nltk &>/dev/null;
+    echo 'Installed nltk';
+    pip install numpy &>/dev/null;
+    echo 'Installed numpy';
+    pip install torch &>/dev/null;
+    echo 'Installed torch';
+)
+(
+  cd 'src/hehe-chan-ai'
+  . bot/bin/activate;
+  python - << EOF
+import nltk
+nltk.download('punkt')
+EOF
+  echo 'Installed nltk punkt tokeniser';
   echo 'Training bot'
-  python3 train.py &>/dev/null;
+  python train.py &>/dev/null;
   echo 'Bot trained on given intents'
-) 
-
+)
 activate () {
   . src/hehe-chan-ai/bot/bin/activate
 }
 sleep 1;
 echo 'Activating bot environment';
-activate
-
+activate;
 
 # node processes
 sleep 1;
 echo 'Installing Node Modules'
 npm install &>/dev/null;
-echo 'installed '
-echo '    "colors": "^1.4.0",
-    "date-fns": "^2.29.3",
-    "discord.js": "^14.6.0",
-    "dotenv": "^16.0.3"
-'
+echo 'installed'
+# echo '    "colors": "^1.4.0",
+#     "date-fns": "^2.29.3",
+#     "discord.js": "^14.6.0",
+#     "dotenv": "^16.0.3"
+# '
 sleep 1;
 if [[ $setup = yes ]]
 then
-  echo 'Staring bot server'
+  echo 'Staring bot server';
   npm run start;
 else
   sleep 1;
-  echo 'setup complete'
+  echo 'setup complete';
   sleep 1;
   echo 'Use the following command to start your bot';
   echo 'npm run start';

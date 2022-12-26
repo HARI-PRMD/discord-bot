@@ -7,10 +7,10 @@ import sys
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-with open('./src/hehe-chan-ai/pytorch-chatbot/intents.json', 'r') as json_data:
+with open('./src/hehe-chan-ai/intents.json', 'r') as json_data:
     intents = json.load(json_data)
 
-FILE = "./src/hehe-chan-ai/pytorch-chatbot/data.pth"
+FILE = "./src/hehe-chan-ai/data.pth"
 data = torch.load(FILE)
 
 input_size = data["input_size"]
