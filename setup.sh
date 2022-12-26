@@ -64,7 +64,10 @@ echo '    "colors": "^1.4.0",
   cd 'data'
   touch 'names.json'
   echo "{}" > names.json
-  echo 'Created Data Files'
+  echo 'Created user data file'
+  touch 'dmMessages.json'
+  echo "[]" > dmMessages.json
+  echo 'Created DM data file'
 )
 
 sleep 1;

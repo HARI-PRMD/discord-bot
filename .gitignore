@@ -129,8 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# My Custom DataBase
-# names.json
+
 
 
 # Byte-compiled / optimized / DLL files
@@ -278,6 +277,6 @@ bot/
 
 data.pth
 
+# My Custom DataBase
 names.json
-
 dmMessages.json

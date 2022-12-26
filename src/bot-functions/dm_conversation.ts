@@ -29,7 +29,7 @@ export async function dmConversation(message: Message) {
       console.log(
         colors.inverse.brightRed(" AI  ") +
           colors.brightRed(
-            `         ${message.author.username} Encountered error while fetching reply message: ${message.content}, reply: ${botReply}`
+            `         ${message.author.username} Encountered error while fetching reply message: ${message.content}, reply: ${botReply}, error: ${e}`
           )
       );
     }
