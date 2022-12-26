@@ -16,9 +16,13 @@ export async function dmConversation(message: Message) {
 
   process.on("close", (code: any) => {
     message.channel.sendTyping();
-
-    console.log(`talking with ${message.author.username}.`);
-    if (botReply === "") {
+    try {
+      console.log(`talking with ${message.author.username}.`);
+      setTimeout(() => {
+        message.channel.send(botReply);
+      }, 500);
+      collectDmData(message.content, botReply);
+    } catch (e) {
       message.channel.send(
         "Encountered error while fetching reply, issue has automatically been sent to developer"
       );
@@ -28,11 +32,6 @@ export async function dmConversation(message: Message) {
             `         ${message.author.username} Encountered error while fetching reply message: ${message.content}, reply: ${botReply}`
           )
       );
-      return;
     }
-    setTimeout(() => {
-      message.channel.send(botReply);
-    }, 500);
-    collectDmData(message.content, botReply);
   });
 }

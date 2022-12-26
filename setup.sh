@@ -22,7 +22,7 @@ echo 'Created .env file with token';
 # Creating Environment
 (
   cd src/hehe-chan-ai/;
-  python -m venv bot;
+  python3 -m venv bot;
   . bot/bin/activate;
   echo 'Downloading Python dependencies for AI Component';
   
@@ -33,15 +33,11 @@ echo 'Created .env file with token';
     echo 'Installed numpy';
     pip install torch &>/dev/null;
     echo 'Installed torch';
-)
-(
-  cd 'src/hehe-chan-ai'
-  . bot/bin/activate;
-  python - << EOF
+    python3 - << EOF
 import nltk
 nltk.download('punkt')
 EOF
-  echo 'Installed nltk punkt tokeniser';
+    echo 'Installed nltk punkt tokeniser';
   echo 'Training bot'
   python train.py &>/dev/null;
   echo 'Bot trained on given intents'

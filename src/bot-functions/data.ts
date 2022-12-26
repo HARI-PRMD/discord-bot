@@ -71,7 +71,7 @@ export function loadMap() {
   } catch (error) {
     console.error(
       colors.inverse.brightRed(" ERROR ") +
-        colors.brightRed(` Error occurbrightRed while loading file:, ${error}`)
+        colors.brightRed(` Error occurred while loading file:, ${error}`)
     );
   }
   // getting girls names list for jealous function from file
@@ -92,7 +92,7 @@ export function loadMap() {
     console.log();
     console.error(
       colors.inverse.brightRed(" ERROR ") +
-        colors.brightRed(` Error occurbrightRed while loading names: ${error}`)
+        colors.brightRed(` Error occurred while loading names: ${error}`)
     );
   }
 }
