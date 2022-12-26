@@ -38,17 +38,22 @@ import nltk
 nltk.download('punkt')
 EOF
   echo 'Installed nltk punkt tokeniser';
-  sleep 1;
-  echo 'Training bot'
-  python train.py &>/dev/null;
-  echo 'Bot trained on given intents'
 )
+
 activate () {
   . src/hehe-chan-ai/bot/bin/activate
 }
+
 sleep 1;
 echo 'Activating bot environment';
 activate;
+(
+  sleep 1;
+  echo 'Training bot'
+  cd 'src/hehe-chan-ai/'
+  python train.py 2>/dev/null;
+  echo 'Bot trained on given intents'
+)
 
 # node processes
 sleep 1;
