@@ -24,12 +24,12 @@ Windows
   pip install nltk
   pip install numpy
   pip install torch
-  python
 ```
 
 Then type for punkt tokenizer
 
 ```python
+  python
   >>> import nltk
   >>> nltk.download('punkt')
   >>> quit()
