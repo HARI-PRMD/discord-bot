@@ -1,6 +1,6 @@
 import { ActivityType, Constants, EmbedBuilder, Message } from "discord.js";
 import { pfpDetails, saveMap, userData } from "./data";
-import { client } from "./index";
+import { client } from "../index";
 var colors = require("colors/safe");
 import { pfpPrice, statusPrice } from "./contants";
 import {
