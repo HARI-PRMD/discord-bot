@@ -63,6 +63,8 @@ echo '    "colors": "^1.4.0",
   echo 'Creating Data Files'
   cd 'data'
   touch 'names.json'
+  echo "{}" > names.json
+  echo 'Created Data Files'
 )
 
 sleep 1;
