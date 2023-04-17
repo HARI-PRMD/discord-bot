@@ -8,7 +8,6 @@ import {
   Message,
 } from "discord.js";
 import {
-  DMfunctions,
   guildFunctions,
   runOnStart,
 } from "./bot-functions/bot_functions_list";
@@ -34,8 +33,7 @@ client.on("ready", () => {
 client.on("messageCreate", async (message: Message) => {
   if (message.author.bot) return;
   if (message.channel.isDMBased()) {
-    message.reply("Sorry DM functions have been disabled for now 🥺, pester Hehe to fix me up.")
-    // await DMfunctions(message);
+    message.reply("Sorry DM functions have been disabled for now 🥺, pester Hehe to fix me up.");
   }
   if (!message.channel.isDMBased()) {
     guildFunctions(message);

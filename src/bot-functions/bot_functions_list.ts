@@ -12,7 +12,6 @@ import {
   messageWork,
 } from "./messages";
 import { loadMap } from "./data";
-import { dmConversation } from "./dm_conversation";
 var colors = require("colors/safe");
 
 export function runOnStart() {
@@ -91,13 +90,5 @@ export function guildFunctions(message: Message) {
     message.channel.send(
       `Baka ${message.author.username} 🏓🤨 stop pinging me!`
     );
-  }
-}
-
-export async function DMfunctions(message: Message) {
-  try {
-    dmConversation(message);
-  } catch {
-    console.log(`Bot AI component error: `, message);
   }
 }
