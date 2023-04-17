@@ -20,7 +20,7 @@ export function runOnStart() {
   client.user?.setPresence({
     activities: [
       {
-        name: "Hehe cry while coding 👨‍💻",
+        name: "Hehe ❤️",
         type: ActivityType.Watching,
         url: "https://github.com/HARI-PRMD",
       },
@@ -89,7 +89,7 @@ export function guildFunctions(message: Message) {
 
   if (message.mentions.has("1031072718570922014")) {
     message.channel.send(
-      `Baka ${message.author.username} 🏓🤨 I'm not ready yet!`
+      `Baka ${message.author.username} 🏓🤨 stop pinging me!`
     );
   }
 }
