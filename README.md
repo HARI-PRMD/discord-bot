@@ -1,6 +1,10 @@
 # Typescript x Python E-Girl Discord Bot
 
-A Discord bot equipped with multiple chat functions for both guilds and dms.
+I am no longer maintaining this or updating it with new features, so I shall Archive it.
+Also word of advice, set up a separate API to track conversations etc (the AI part of this project), having two languages in the same project is super cumbersome.
+
+
+A Discord bot equipped with multiple chat functions for both guilds and DMs.
 
 ## Initial setup
 
@@ -58,7 +62,7 @@ type `!help` in a server to get a full list of guild functions.
 
 <img src="./bot-functions.png"  width="60%">
 
-Apart from this you can train the bot by updating [intents.json](src/hehe-chan-ai/intents.json). Just define a new `tag`, possible `patterns`, and possible `responses` for the chat bot. You have to re-run the training whenever this file is modified.
+You can also train the bot by updating [intents.json](src/hehe-chan-ai/intents.json). Just define a new `tag`, possible `patterns`, and possible `responses` for the chatbot. You have to re-run the training whenever this file is modified.
 
 ```json
 {
